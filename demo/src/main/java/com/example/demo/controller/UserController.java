@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.Service.UserService;
 import com.example.demo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,5 +34,13 @@ public class UserController {
     @GetMapping("/get")
     public User getUser(@RequestParam Integer id){
         return userService.getUser(id);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Void> updateUser(@PathVariable Integer id, @RequestBody User user){
+        userService.updateUser(id,user);
+
+        return ResponseEntity.noContent().build();
+
     }
 }
