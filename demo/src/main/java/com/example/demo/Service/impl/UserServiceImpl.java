@@ -48,4 +48,14 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
     }
+
+    @Override
+    public void deleteUser(Integer id) {
+        User user = userRepository
+                .findById(id)
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Invalid id" + id));
+        user.setId(id);
+
+        userRepository.delete(user);
+    }
 }
