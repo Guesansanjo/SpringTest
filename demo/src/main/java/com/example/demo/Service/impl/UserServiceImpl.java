@@ -1,6 +1,7 @@
 package com.example.demo.Service.impl;
 
 import com.example.demo.Service.UserService;
+import com.example.demo.dto.UserDTO;
 import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +55,19 @@ public class UserServiceImpl implements UserService {
         User user = userRepository
                 .findById(id)
                 .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Invalid id" + id));
-        user.setId(id);
 
         userRepository.delete(user);
     }
+
+    @Override
+    public void updateName(Integer id, UserDTO userDTO) {
+        User user = userRepository
+                .findById(id)
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"Invalid id" + id));
+
+    user.setName(userDTO.getName());
+    userRepository.save(user);
+    }
+
+
 }

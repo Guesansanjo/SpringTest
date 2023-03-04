@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.Service.UserService;
+import com.example.demo.dto.UserDTO;
 import com.example.demo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +48,13 @@ public class UserController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Integer id){
         userService.deleteUser(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/update-name/{id}")
+    public ResponseEntity<Void> updateName(@PathVariable Integer id ,@RequestBody UserDTO userDTO){
+        userService.updateName(id,userDTO);
 
         return ResponseEntity.noContent().build();
     }
