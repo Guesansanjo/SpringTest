@@ -29,4 +29,9 @@ public class UserController {
     public List<User> getUsers(){
     return userService.getUsers();
     }
+
+    @GetMapping("/get")
+    public User getUser(@RequestParam Integer id){
+        return userService.getUser(id);
+    }
 }
